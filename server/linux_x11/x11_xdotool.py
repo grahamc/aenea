@@ -285,6 +285,20 @@ class XdotoolPlatformRpcs(AbstractAeneaPlatformRpcs):
         except Exception as e:
             self.logger.warn('failed to start notify-send process: %s' % e)
 
+    def micState(self, state):
+        '''Send the microphone state to DBUS'''
+        self.logger.debug("dbus-send /dictationtoolbox/aenea/microphonestate"
+                          "dictationtoolbox.aenea.microphonestate 'string:%s'" % state)
+        try:
+            subprocess.Popen(['dbus-send',
+                    '/dictationtoolbox/aenea/microphonestate',
+                    'dictationtoolbox.aenea.microphonestate',
+                    "string:%s" % state
+                    ])
+        except Exception as e:
+            self.logger.warn('failed to start dbus-send process: %s' % e)
+
+
     def move_mouse(self, x, y, reference='absolute', proportional=False,
                    phantom=None, _xdotool=None):
         '''move the mouse to the specified coordinates. reference may be one

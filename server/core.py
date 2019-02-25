@@ -127,6 +127,7 @@ class AbstractAeneaPlatformRpcs(object):
             'move_mouse': self.move_mouse,
             'pause': self.pause,
             'notify': self.notify,
+            'micState': self.micState,
         }
 
     @abc.abstractmethod
@@ -224,6 +225,14 @@ class AbstractAeneaPlatformRpcs(object):
         """
         Send a message to the desktop to be displayed in a notification window.
         :param str message: message to send to the desktop.
+        :return: This function always returns None.
+        """
+        raise NotImplementedError()
+
+    def micState(self, state):
+        """
+        Send a message to the desktop representing the current microphone state.
+        :param str state: state of the microphone
         :return: This function always returns None.
         """
         raise NotImplementedError()
